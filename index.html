@@ -5,13 +5,210 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Mariage de Theotime et Johanna - Invitation" />
-  <title>Theotime & Johanna - Célébrons l'Amour</title>
+  <title>Theotime & Johanna</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="/styles/style.css">
+
+  <style>
+    /* Hotel cards */
+    .hotel-card {
+      background: var(--primary-color);
+      border: 1px solid var(--accent-color-light);
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .hotel-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-medium);
+    }
+
+    .hotel-figure {
+      margin: 0;
+      height: 200px;
+      overflow: hidden;
+    }
+
+    .hotel-figure img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .hotel-card:hover .hotel-figure img {
+      transform: scale(1.05);
+    }
+
+    .hotel-content {
+      padding: 1.5rem;
+    }
+
+    .hotel-name {
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      color: var(--accent-color);
+    }
+
+    .hotel-address {
+      font-size: 1rem;
+      color: var(--light-text);
+      margin-bottom: 1.5rem;
+    }
+
+    .hotel-address i {
+      margin-right: 0.5rem;
+      color: var(--accent-color);
+    }
+
+    .hotel-btn {
+      display: inline-block;
+      padding: 0.8rem 1.5rem;
+      background-color: transparent;
+      color: var(--accent-color);
+      border: 1px solid var(--accent-color);
+      font-family: var(--font-family-sans);
+      text-transform: uppercase;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+    }
+
+    .hotel-btn:hover {
+      background-color: var(--accent-color);
+      color: var(--primary-color);
+    }
+
+    .hotel-btn i {
+      margin-left: 0.5rem;
+      font-size: 0.8rem;
+    }
+
+    /* Hotels section title */
+    .hotels-title {
+      margin-bottom: 2rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    .hotels-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 2px;
+      background: linear-gradient(to right, rgba(212, 175, 55, 0.2), var(--accent-color), rgba(212, 175, 55, 0.2));
+    }
+
+    /* Hotels section */
+    .hotels-section {
+      padding: 4rem 1rem;
+      background: linear-gradient(rgba(255,255,255,0.6), rgba(255,255,255,0.6)), var(--bg-marble);
+      background-size: cover;
+      background-position: center;
+    }
+
+    .hotels-container {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .hotels-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .hotel-card {
+      background: var(--primary-color);
+      border: 1px solid var(--accent-color-light);
+      border-radius: 4px;
+      padding: 1rem;
+      transition: transform 0.3s ease;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .hotel-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-medium);
+    }
+
+    .hotel-content {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .hotel-name {
+      font-size: 0.9rem;
+      color: var(--accent-color);
+      margin: 0;
+      line-height: 1.3;
+    }
+
+    .hotel-address {
+      font-size: 0.8rem;
+      color: var(--light-text);
+      margin: 0;
+      line-height: 1.4;
+    }
+
+    .hotel-btn {
+      display: inline-block;
+      padding: 0.5rem;
+      margin-top: 0.5rem;
+      background: transparent;
+      color: var(--accent-color);
+      border: 1px solid var(--accent-color);
+      font-family: var(--font-family-sans);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+    }
+
+    .hotel-btn:hover {
+      background: var(--accent-color);
+      color: var(--primary-color);
+    }
+
+    .hotel-btn i {
+      font-size: 0.7rem;
+      margin-left: 0.3rem;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 900px) {
+      .hotels-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 576px) {
+      .hotels-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hotel-card {
+        padding: 0.8rem;
+      }
+
+      .hotels-section {
+        padding: 3rem 1rem;
+      }
+    }
+  </style>
   <script type="module" crossorigin src="/assets/index-BuFJD4tF.js"></script>
   <link rel="stylesheet" crossorigin href="/assets/index-BNDwDm_w.css">
 </head>
@@ -23,7 +220,7 @@
       <p><i class="fas fa-heart"></i> MARIAGE THEOTIME & JOHANNA</p>
     </div>
     <div class="top-bar-right">
-      <p><i class="fas fa-calendar-alt"></i> 24-25 JUIN 2025 • MARSEILLE</p>
+      <p><i class="fas fa-calendar-alt"></i> 25 JUIN 2025 • MARSEILLE</p>
     </div>
   </div>
 
@@ -46,6 +243,9 @@
         <a href="#lieu" class="nav-link">Lieu</a>
       </li>
       <li class="nav-item">
+        <a href="#hotels" class="nav-link">Où séjourner</a>
+      </li>
+      <li class="nav-item">
         <a href="#contact" class="nav-link">RSVP</a>
       </li>
     </ul>
@@ -56,7 +256,7 @@
     <div class="hero-content">
       <h1 class="hero-title">Theotime & Johanna</h1>
       <p class="hero-subtitle">Nous allons nous marier!</p>
-      <p class="hero-date">24-25 JUIN 2025</p>
+      <p class="hero-date">25 JUIN 2025</p>
       <div class="monogram">T&J</div>
     </div>
 
@@ -276,6 +476,69 @@
     </div>
   </section>
 
+  <!-- Section Hôtels -->
+  <section id="hotels" class="hotels-section scroll-reveal">
+    <div class="hotels-container">
+      <h2 class="hotels-title">Où séjourner&nbsp;?</h2>
+      <div class="hotels-grid">
+        <!-- Le Petit Nice Passedat -->
+        <article class="hotel-card">
+          <div class="hotel-content">
+            <h3 class="hotel-name"><i class="fas fa-hotel"></i> Le Petit Nice Passedat</h3>
+            <p class="hotel-address"><i class="fas fa-map-marker-alt"></i> Anse de Maldormé, Corniche JF Kennedy</p>
+            <a class="hotel-btn" href="https://www.booking.com/hotel/fr/le-petit-nice-marseille.fr.html" target="_blank" rel="noopener">Réserver <i class="fas fa-external-link-alt"></i></a>
+          </div>
+        </article>
+
+        <!-- Hôtel Peron -->
+        <article class="hotel-card">
+          <div class="hotel-content">
+            <h3 class="hotel-name"><i class="fas fa-hotel"></i> Hôtel Peron</h3>
+            <p class="hotel-address"><i class="fas fa-map-marker-alt"></i> 119 Corniche JF Kennedy</p>
+            <a class="hotel-btn" href="https://hotel-peron.hotelmarseille.org/fr/#main" target="_blank" rel="noopener">Réserver <i class="fas fa-external-link-alt"></i></a>
+          </div>
+        </article>
+
+        <!-- Mercure Bompard -->
+        <article class="hotel-card">
+          <div class="hotel-content">
+            <h3 class="hotel-name"><i class="fas fa-hotel"></i> Mercure Marseille Bompard</h3>
+            <p class="hotel-address"><i class="fas fa-map-marker-alt"></i> 2 Rue des Flots Bleus</p>
+            <a class="hotel-btn" href="https://www.booking.com/hotel/fr/bompard.fr.html?label=gen173rf-1FCAsoTUIHYm9tcGFyZEgzWANoFYgBAZgBDbgBF8gBDNgBAegBAfgBA4gCAaICC2NoYXRncHQuY29tqAIDuAKVoZvABsACAdICJDkzMTk1ZjllLTBkOTQtNDU5NC05YTI4LTQ2MDg1YzdmM2JlMdgCBeACAQ&sid=71803039219c268eb9d9fd3e1ae307f1&dist=0&group_adults=2&keep_landing=1&sb_price_type=total&type=total&" target="_blank" rel="noopener">Réserver <i class="fas fa-external-link-alt"></i></a>
+          </div>
+        </article>
+
+        <!-- nhow Marseille -->
+        <article class="hotel-card">
+          <div class="hotel-content">
+            <h3 class="hotel-name"><i class="fas fa-hotel"></i> nhow Marseille</h3>
+            <p class="hotel-address"><i class="fas fa-map-marker-alt"></i> 200 Corniche JF Kennedy</p>
+            <a class="hotel-btn" href="https://www.booking.com/hotel/fr/nhow-marseille.html" target="_blank" rel="noopener">Réserver <i class="fas fa-external-link-alt"></i></a>
+          </div>
+        </article>
+
+        <!-- Sofitel Vieux-Port -->
+        <article class="hotel-card">
+          <div class="hotel-content">
+            <h3 class="hotel-name"><i class="fas fa-hotel"></i> Sofitel Vieux-Port</h3>
+            <p class="hotel-address"><i class="fas fa-map-marker-alt"></i> 36 Boulevard Charles Livon</p>
+            <a class="hotel-btn" href="https://www.booking.com/hotel/fr/sofitel-marseille-vieux-port.html" target="_blank" rel="noopener">Réserver <i class="fas fa-external-link-alt"></i></a>
+          </div>
+        </article>
+
+        <!-- Le Drip's -->
+        <article class="hotel-card">
+          <div class="hotel-content">
+            <h3 class="hotel-name"><i class="fas fa-hotel"></i> Le Drip's</h3>
+            <p class="hotel-address"><i class="fas fa-map-marker-alt"></i> 21 Place Louis Bonnefon</p>
+            <a class="hotel-btn" href="https://www.villamassalia.com/" target="_blank" rel="noopener">Réserver <i class="fas fa-external-link-alt"></i></a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+
   <!-- Pied de page -->
   <footer class="footer">
     <div class="footer-container">
@@ -289,6 +552,7 @@
         <li><a href="#galerie" class="footer-link">Galerie</a></li>
         <li><a href="#lieu" class="footer-link">Lieu</a></li>
         <li><a href="#contact" class="footer-link">RSVP</a></li>
+        <li><a href="#hotels" class="footer-link">Hôtels</a></li>
       </ul>
 
       <p class="copyright">© 2025 - Avec amour <i class="fas fa-heart"></i></p>
@@ -385,6 +649,37 @@
       });
     });
   </script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) e.target.classList.add('active');
+      });
+    }, { threshold: .15 });
+  
+    document.querySelectorAll('.scroll-reveal')
+            .forEach(el => observer.observe(el));
+  });
+  </script>
+
+<!-- background music -->
+<audio id="bg-music" src="/assets/music-C-nOVqKU.mp3" preload="auto" loop></audio>
+
+<script>
+  document.addEventListener('click', function playBG() {
+    const audio = document.getElementById('bg-music');
+    audio.volume = 0.2; // Set volume to 20%
+    audio.play().catch(() => {
+      console.warn('Autoplay blocked; user interaction required');
+    });
+    // remove handler so it only fires once
+    document.removeEventListener('click', playBG);
+  });
+</script>
+
+
 </body>
 
 </html>
+
+
